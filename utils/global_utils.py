@@ -1,5 +1,5 @@
-from restaurent import Restaurent
-from restaurent_slot import RestaurentSlot
+from modals.restaurent import Restaurent
+from modals.restaurent_slot import RestaurentSlot
 import json
 
 class Utils:

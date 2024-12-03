@@ -1,20 +1,16 @@
-from restaurent import Restaurent
-from booking import Booking
+from modals.restaurent import Restaurent
+from modals.booking import Booking
 
-class RestaurentBookingApp:
+from booking_system.booking_app import AbstractBookingSystem
+
+class RestaurentBookingApp(AbstractBookingSystem):
     restaurent_list = []
     booking_list = []
 
-    def __init__(self):
-        pass
-
     # search key can be a restaurent name, city, area, food type
-    def search_restaurent(self, 
-                          search_key = None, 
-                          search_value = None):
+    def search(self, search_key = None, search_value = None):
         restaurent_list = []
 
-        # name search processor
         if search_key == "name":
             for restaurent in RestaurentBookingApp.restaurent_list:
                 if restaurent.name == search_value:
@@ -32,11 +28,9 @@ class RestaurentBookingApp:
                 if restaurent.city == search_value:
                     restaurent_list.append(restaurent)
         elif not search_value: 
-            print("hi56")
             restaurent_list = RestaurentBookingApp.restaurent_list
         else : 
             ## it is debateable on what to return in case of empty
-            print("hi")
             restaurent_list = RestaurentBookingApp.restaurent_list
 
         if not search_value : 
@@ -50,16 +44,16 @@ class RestaurentBookingApp:
                     restaurent.slots.append(slot)
                     break
 
-    def get_restaurent(self, name): 
+    def get(self, name): 
         for restaurent in RestaurentBookingApp.restaurent_list:
                 if restaurent.name == name:
                     return restaurent
 
-    def register_restaurent(self, name, city, area, food_type):
+    def register(self, name, city, area, food_type):
         new_restaurent = Restaurent(name, city, area, food_type)
         RestaurentBookingApp.restaurent_list.append(new_restaurent)
 
-    def book_table(self, user_name, restaurent_name, date, start_time, member_count):
+    def book(self, user_name, restaurent_name, date, start_time, member_count):
         for restaurent in RestaurentBookingApp.restaurent_list:
                 if restaurent.name == restaurent_name:
                     booked = restaurent.book_table(date, start_time, member_count)
