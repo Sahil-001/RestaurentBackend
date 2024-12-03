@@ -2,14 +2,14 @@
 FROM python:3.9 AS backend
 
 # Set the working directory for the backend
-WORKDIR /app/backend
+WORKDIR /app
 
 # Copy the backend requirements and install dependencies
-COPY backend/restaurent_app/requirements.txt ./
+COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the entire backend source code
-COPY backend/restaurent_app/ ./
+COPY . .
 
 # Expose Flask port (8001)
 EXPOSE 8001
